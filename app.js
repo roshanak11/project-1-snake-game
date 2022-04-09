@@ -49,7 +49,15 @@ removeSnake(snakePosition); // ! remove pikachu from the current position
   } else if (key === 'ArrowDown' && colPosition < width - 1) { // ! Down
     snakePosition += width
   }
-
+  console.log('snakePosition: ', snakePosition);
+  console.log('fruitPosition: ', fruitPosition);
+  if(snakePosition === fruitPosition){
+    console.log('collisionPoints');
+    cells[fruitPosition].classList.remove('fruit')
+    // !make snake longer
+    //! add innerhTML to score/points +10, use the ${} js thingy
+    //! turn this into a function, then append the function to make snake grow longer and add points
+  }
   addSnake(snakePosition); // ! add pikachu back at the new position
 })
 
@@ -58,8 +66,19 @@ function fruitLocation() {
     cells[fruitPosition].classList.remove('fruit');
     fruitPosition = Math.floor(Math.random() * cells.length); 
     cells[fruitPosition].classList.add('fruit');
-  }, 1000);
+  }, 4000);
 }
 
 
 fruitLocation();
+
+
+// !Not working yet
+// * Score and Snake Size increase after eating fruit
+let snakeSize = 5;
+let score = 0;
+
+const snakeEatsFruit = () => {
+  score = score + 10;// iterate score  
+  snakeSize = 5 + snake; // when snake eats a fruit
+}
