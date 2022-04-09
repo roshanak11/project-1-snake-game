@@ -24,7 +24,7 @@ body {
 }
 
 .grid div {
-  border: 0.5px solid black;
+  border: 0.5px solid rgb(0, 0, 0);
   background-color: lightpink;
   flex-grow: 1;
   height: 10vh;

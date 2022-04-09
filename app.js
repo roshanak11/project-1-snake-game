@@ -2,21 +2,22 @@
 const grid = document.querySelector('.grid');
 const cells = [];
 
-// * Grid variables
+// * grid variables
 const width = 10;
-const height = 10;
-const totalCells = width * height;
+const totalCells = width * width;
 
-// * Snake & Fruit variables
-let snakePosition = 0;
+// * game variables
+let snakePosition = 55;
 let fruitPosition = Math.floor(Math.random() * totalCells);
 
-// * Add Snake
 function addSnake() {
   cells[snakePosition].classList.add('snake');
 }
 
-// * Create Grid
+function removeSnake() {
+  cells[snakePosition].classList.remove('snake');
+}
+
 function createGrid() {
   for (let i = 0; i < totalCells; i++) {
     const cell = document.createElement('div');
@@ -28,11 +29,9 @@ function createGrid() {
 
 createGrid();
 
-
-// Moving Snake with arrow keys
-
 document.addEventListener('keyup', (event) => {
 
+removeSnake(snakePosition); // ! remove pikachu from the current position
   // ! Get the key the user pressed
   const key = event.code;
   console.log(key);
@@ -50,23 +49,17 @@ document.addEventListener('keyup', (event) => {
   } else if (key === 'ArrowDown' && colPosition < width - 1) { // ! Down
     snakePosition += width
   }
+
+  addSnake(snakePosition); // ! add pikachu back at the new position
 })
-
-addSnake(snakePosition); // ! add Snake back at the new position
-
 
 function fruitLocation() {
   setInterval(() => {
     cells[fruitPosition].classList.remove('fruit');
     fruitPosition = Math.floor(Math.random() * cells.length); 
     cells[fruitPosition].classList.add('fruit');
-  }, 1000)
+  }, 1000);
 }
 
+
 fruitLocation();
-
-
-// we are not removing snake, it's growing
-// function removeSnake() {
-//   cells[snakePosition].classList.remove('snake');
-// }
