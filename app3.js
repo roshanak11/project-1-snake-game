@@ -9,9 +9,16 @@ const totalCells = width * width;
 
 
 // * game variables
-let snakePosition = [55, 54, 53]; 
-//! snakeSpeed = 10 make speed a variable and you can manipulate it everytime it gets a fruit
-//! if statement snake can't be on fruit
+let snakePosition = [55, 54, 53]; // map through it
+// first index is head
+//create constant for index 0 in snakePosition
+//you wanna add 1 add 1 and delete bum
+//oppposite direction then
+// 3 directions if the last key passes left then you can only go other 3 directions
+// make an if statement for every move, if the index 1 is the same as head -1 you can't go left and if it's head +1 you can't go rigth
+// snakeSpeed = 10 make speed a variable and you can manipulate it everytime it gets a fruit
+// if statement snake can't be on fruit
+// focus on left and right, then work on up and down
 let fruitPosition = Math.floor(Math.random() * totalCells);
 
 function addSnake () {
@@ -39,57 +46,69 @@ createGrid();
 
 
 
-
-// //* Snake tail moves 
-// We are going to add 1 to the head of the snake at index 0, and have index 1 of the array shift into the location of index 0, and index 2 shift into the location of index 1. We will remove the old snake and add the new snake array onto the grid.
+//!test it out. do all 4 key strokese h
+// //* Snake tail moves //! test this out
+// // We are going to add 1 to the head of the snake at index 0, and have index 1 of the array shift into the location of index 0, and index 2 shift into the location of index 1. We will remove the old snake and add the new snake array onto the grid.
 function keyRight() {
   console.log("pressed");
   removeSnake(); // remove old snake array
+  //! if (ArrowRight) {
     let head = snakePosition[0]; // access head location of snake array
     head += 1; // move head of snake one cell to the right 
     snakePosition.unshift(head); // removes old index 0 value of head array
     snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
+  //! }
   addSnake(); // add new snake array onto new location of grid
 }
 
 function keyLeft() {
   removeSnake(); // remove old snake array
+  //! if (ArrowLeft) {
     let head = snakePosition[0]; // access head location of snake array
     head -= 1; // move head of snake one cell to the left 
     snakePosition.unshift(head); // removes old index 0 value of head array
     snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
+  //! }
   addSnake(); // add new snake array onto new location of grid
 }
 
 function keyUp() {
   removeSnake(); // remove old snake array
+  // !if (ArrowUp) {
     let head = snakePosition[0]; // access head location of snake array
     head -= width; // move head of snake one cell up 
     snakePosition.unshift(head); // removes old index 0 value of head array
     snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
+  //! }
   addSnake(); // add new snake array onto new location of grid
 }
 
 
 function keyDown() {
   removeSnake(); // remove old snake array
+  //! if (ArrowDown) {
     let head = snakePosition[0]; // access head location of snake array
     head += width; // move head of snake one cell down
     snakePosition.unshift(head); // removes old index 0 value of head array
     snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
+  //! }
   addSnake(); // add new snake array onto new location of grid
 }
 
 
 
-//* Key strokes move snake
+
 
 document.addEventListener('keyup', (event) => {
 
-// removeSnake(snakePosition); // ! remove snake from the current position
+// removeSnake(snakePosition); // ! remove pikachu from the current position
   // ! Get the key the user pressed
   const key = event.code;
   console.log(key);
+
+  // ! rowPosition and colPosition
+  // const rowPosition = snakePosition % width;
+  // const colPosition = Math.floor(snakePosition / width);
 
   if (key === 'ArrowLeft') { // && rowPosition > 0) { // ! Left. ADD NICK's FUNCTION HERE
     keyLeft();
@@ -107,7 +126,7 @@ document.addEventListener('keyup', (event) => {
   }
   console.log('snakePosition: ', snakePosition);
   console.log('fruitPosition: ', fruitPosition);
-  if(snakePosition[0] === fruitPosition){
+  if(snakePosition === fruitPosition){
     console.log('collisionPoints');
     // scoreboard.innerHTML += 10 + 'points';
     cells[fruitPosition].classList.remove('fruit')
@@ -148,19 +167,28 @@ function snakeSlithers() {
 
 snakeSlithers();
 
-
-//!!! NONE OF THIS WORKS
 //! TO DO FIRST
 //! snake has to move automayically, not just with keyboard stroke!
 //! snake has to move with intervals, like the yellow dancefloor but instea dof randomly generating it'll pull numbers from array
 //! and within interval remove the snake from where it is and change the numbers 
 //! have your interval and inside it remove snake and think of how to change snake position array
-//* for increasing speed turn this into if statement for if snake positon = apple postion
+// // for increasing speed turn this into if statement for if snake positon = apple postion
 // const moveOneCell = (value) => {
 //   return value + 1;
 // }
 // console.log(snakePosition.map(moveOneCell));
 
+//!instead of random generated number you're gonna take numbers from the array and use the same code as above to make the snake MOVE
+// function fruitLocation() {
+//   setInterval(() => {
+//     cells[fruitPosition].classList.remove('fruit');
+//     fruitPosition = Math.floor(Math.random() * cells.length); 
+//     cells[fruitPosition].classList.add('fruit');
+//   }, 4000);
+// }
+
+
+// fruitLocation();
 
 
 
@@ -216,7 +244,3 @@ snakeSlithers();
 // // function scoreUpdate(){
 // //   innertext.html = "score" += score
 // // }
-
-
-///? COLLISION DETECTION HITS WALL OR ITSELF
-//? APPLE CANNOT BE SAME POSITION AS SNAKE
