@@ -39,7 +39,6 @@ createGrid();
 
 
 
-
 // //* Snake tail moves 
 // We are going to add 1 to the head of the snake at index 0, and have index 1 of the array shift into the location of index 0, and index 2 shift into the location of index 1. We will remove the old snake and add the new snake array onto the grid.
 function keyRight() {
@@ -70,7 +69,6 @@ function keyUp() {
   addSnake(); // add new snake array onto new location of grid
 }
 
-
 function keyDown() {
   removeSnake(); // remove old snake array
     let head = snakePosition[0]; // access head location of snake array
@@ -82,7 +80,7 @@ function keyDown() {
 
 
 
-//* Key strokes move snake
+//* Keyboard strokes move the snake
 
 document.addEventListener('keyup', (event) => {
 
@@ -110,8 +108,8 @@ document.addEventListener('keyup', (event) => {
   if(snakePosition[0] === fruitPosition){
     console.log('collisionPoints');
     // scoreboard.innerHTML += 10 + 'points';
-    cells[fruitPosition].classList.remove('fruit')
-    //! make snake longer
+    cells[fruitPosition].classList.remove('fruit');
+    snakePosition.length += 2;    //Snake tail (array) gets longer by 2 cells when it eats fruit
     //! add innerhTML to score/points +10, use the ${} js thingy
     //! turn this into a function, then append the function to make snake grow longer and add points
   }
@@ -144,9 +142,13 @@ function snakeSlithers() {
     }
   }, 4000);
 }
-
-
 snakeSlithers();
+
+
+// ## MVP Requirements
+// * The snake should be able to eat food to grow bigger snake.length + 2?
+// * The game should end when the snake hits the wall or itself //! POPUP GAME OVER
+// * Snake speeds up as it eats more
 
 
 //!!! NONE OF THIS WORKS
