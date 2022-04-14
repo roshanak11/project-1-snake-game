@@ -9,8 +9,9 @@ const totalCells = width * width;
 
 
 // * game variables
+// let snakePosition = 55;
 let snakePosition = [55, 54, 53]; // map through it
-// first index is head
+// let snakePosition = [55, 54, 53]; //[55, 54, 53]; // first index is head
 //create constant for index 0 in snakePosition
 //you wanna add 1 add 1 and delete bum
 //oppposite direction then
@@ -74,10 +75,9 @@ document.addEventListener('keyup', (event) => {
     //! add innerhTML to score/points +10, use the ${} js thingy
     //! turn this into a function, then append the function to make snake grow longer and add points
   }
-  addSnake(snakePosition); // ! add snake back at the new position
+  addSnake(snakePosition); // ! add pikachu back at the new position
 })
 
-//*Fruit moves around the board randomly
 function fruitLocation() {
   setInterval(() => {
     cells[fruitPosition].classList.remove('fruit');
@@ -93,13 +93,8 @@ fruitLocation();
 function snakeSlithers() {
   setInterval(() => {
     cells[snakePosition].classList.remove('snake');
-    //* Make snake move automatically by using a forEach loop to add 1 cells to every item in array
-    for (i = 0; i < snakePosition.length; i++) {
-      return snakePosition[i] += 1;
-      // return snakePosition[0] += 1;
-      // return snakePosition[1] += 1;
-      // return snakePosition[2] += 1;
-    }
+    //*call snake move function?
+    snakePosition = Math.floor(Math.random() * cells.length); 
     cells[snakePosition].classList.add('snake');
   }, 4000);
 }
@@ -112,11 +107,6 @@ snakeSlithers();
 //! snake has to move with intervals, like the yellow dancefloor but instea dof randomly generating it'll pull numbers from array
 //! and within interval remove the snake from where it is and change the numbers 
 //! have your interval and inside it remove snake and think of how to change snake position array
-// // for increasing speed turn this into if statement for if snake positon = apple postion
-// const moveOneCell = (value) => {
-//   return value + 1;
-// }
-// console.log(snakePosition.map(moveOneCell));
 
 //!instead of random generated number you're gonna take numbers from the array and use the same code as above to make the snake MOVE
 // function fruitLocation() {
@@ -134,50 +124,16 @@ snakeSlithers();
 //!test it out. do all 4 key strokese h
 // //* Snake tail moves //! test this out
 // // We are going to add 1 to the head of the snake at index 0, and have index 1 of the array shift into the location of index 0, and index 2 shift into the location of index 1. We will remove the old snake and add the new snake array onto the grid.
-// function keyRight() {
-//   removeSnake(); // remove old snake array
-//   if (ArrowRight) {
-//     let head = snake[0]; // access head location of snake array
-//     head += 1; // move head of snake one cell to the right 
-//     snakePosition.unshift(head); // removes old index 0 value of head array
-//     snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
-//   }
-//   addSnake(); // add new snake array onto new location of grid
-// }
-
-// function keyLeft() {
-//   removeSnake(); // remove old snake array
-//   if (ArrowLeft) {
-//     let head = snake[0]; // access head location of snake array
-//     head -= 1; // move head of snake one cell to the left 
-//     snakePosition.unshift(head); // removes old index 0 value of head array
-//     snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
-//   }
-//   addSnake(); // add new snake array onto new location of grid
-// }
-
-// function keyUp() {
-//   removeSnake(); // remove old snake array
-//   if (ArrowUp) {
-//     let head = snake[0]; // access head location of snake array
-//     head -= width; // move head of snake one cell up 
-//     snakePosition.unshift(head); // removes old index 0 value of head array
-//     snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
-//   }
-//   addSnake(); // add new snake array onto new location of grid
-// }
-
-
-// function keyDown() {
-//   removeSnake(); // remove old snake array
-//   if (ArrowDown) {
-//     let head = snake[0]; // access head location of snake array
-//     head += width; // move head of snake one cell down
-//     snakePosition.unshift(head); // removes old index 0 value of head array
-//     snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
-//   }
-//   addSnake(); // add new snake array onto new location of grid
-// }
+function keyDown() {
+  removeSnake(); // remove old snake array
+  if (ArrowRight) {
+    let head = snake[0]; // access head location of snake array
+    head += 1; // move head of snake one cell to the right 
+    snakePosition.unshift(head); // removes old index 0 value of head array
+    snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
+  }
+  addSnake(); // add new snake array onto new location of grid
+}
 
 
 // // !Not working yet
