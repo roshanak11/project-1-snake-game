@@ -135,9 +135,6 @@ function snakeSlithers() {
     for (i = 0; i < snakePosition.length; i++) {
       cells[snakePosition[i]].classList.remove('snake');
       snakePosition[i] += 1;
-      // return snakePosition[0] += 1;
-      // return snakePosition[1] += 1;
-      // return snakePosition[2] += 1;
       cells[snakePosition[i]].classList.add('snake');
     }
   }, 4000);
