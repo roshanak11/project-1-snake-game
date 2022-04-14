@@ -110,6 +110,18 @@ document.addEventListener('keyup', (event) => {
     // scoreboard.innerHTML += 10 + 'points';
     cells[fruitPosition].classList.remove('fruit');
     snakePosition.length += 2;    //Snake tail (array) gets longer by 2 cells when it eats fruit
+//! SNAKE WILL SPEED UP WHEN IT EATS FRUIT, turn this into a loop
+let speed = 4000;
+for (i = 0; i < 7; i++){
+  if (snakePosition[0] === fruitPosition && speed > 0){
+  speed = speed - 500;
+  myInterval = setInterval(snakeSlithers, speed);
+  console.log(speed);
+} else {
+  console.log("You win!");
+}
+}
+//!SNAKE SPEED ENDS
     //! add innerhTML to score/points +10, use the ${} js thingy
     //! turn this into a function, then append the function to make snake grow longer and add points
   }
