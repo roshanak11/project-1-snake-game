@@ -1,5 +1,6 @@
 // * Dom Elements
 const grid = document.querySelector('.grid');
+// const snake = document.querySelector('.snake');
 const cells = [];
 const scoreboard = document.querySelector('.score'); // select scoreboard from HTML
 
@@ -81,6 +82,28 @@ function keyDown() {
 
 
 
+//* Make Snake move automatically
+function snakeSlithers() {
+  const slithering = setInterval(() => {
+    //* Make snake move automatically by using a forEach loop to add 1 cells to every item in array
+    for (i = 0; i < snakePosition.length; i++) {
+      if (snakePosition[i]){
+      console.log(snakePosition[i]);
+      cells[snakePosition[i]].classList.remove('snake');
+      snakePosition[i] += 1;
+      // change slither function to add 1 to the last key 
+      // when you push key put it into array and check whatever last item in array is and then  use multiple if statements to move according to last key direction
+      cells[snakePosition[i]].classList.add('snake');
+    } else {
+     clearInterval(slithering); //! figure out where this goes
+    }
+    }
+  }, 4000);
+}
+
+
+
+
 //* Keyboard strokes move the snake
 
 document.addEventListener('keyup', (event) => {
@@ -89,6 +112,12 @@ document.addEventListener('keyup', (event) => {
   // ! Get the key the user pressed
   const key = event.code;
   console.log(key);
+
+  //!should remove this
+  // ! rowPosition and colPosition
+  // const rowPosition = snakePosition % width;
+  // const colPosition = Math.floor(snakePosition / width);
+
 
   if (key === 'ArrowLeft') { // && rowPosition > 0) { // ! Left. ADD NICK's FUNCTION HERE
     keyLeft();
@@ -110,14 +139,15 @@ document.addEventListener('keyup', (event) => {
     console.log('collisionPoints');
     // scoreboard.innerHTML += 10 + 'points';
     cells[fruitPosition].classList.remove('fruit');
-    snakePosition.length += 2;    //Snake tail (array) gets longer by 2 cells when it eats fruit
+    snakePosition.length += 1;    //Snake tail (array) gets longer by 2 cells when it eats fruit
 //! SNAKE WILL SPEED UP WHEN IT EATS FRUIT, turn this into a loop
-  if (snakePosition[0] === fruitPosition && speed > 0){
-  speed = speed - 500;
-  myInterval = setInterval(snakeSlithers, speed);
-  console.log(speed);
-  clearInterval(snakeSlithers);
-} else {
+  if (snakePosition[0] === fruitPosition && speed > 1000){
+  clearInterval(slithering); //! figure out where to put this later
+  speed = speed - 1000;
+slithering = setInterval(snakeSlithers, speed);
+  console.log("The speed is now " + speed);
+} else if (speed === 1000) {
+  clearInterval(slithering); //! figure out where to put this later
   console.log("You win!");
 }
 //!SNAKE SPEED ENDS
@@ -139,18 +169,12 @@ function fruitLocation() {
 
 fruitLocation();
 
+
+
 //* Make Snake move automatically
-function snakeSlithers() {
-  setInterval(() => {
-    //* Make snake move automatically by using a forEach loop to add 1 cells to every item in array
-    for (i = 0; i < snakePosition.length; i++) {
-      cells[snakePosition[i]].classList.remove('snake');
-      snakePosition[i] += 1;
-      cells[snakePosition[i]].classList.add('snake');
-    }
-  }, 4000);
-}
 snakeSlithers();
+
+
 
 
 
