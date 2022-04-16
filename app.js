@@ -6,7 +6,9 @@ const scoreboard = document.querySelector('.score'); // select scoreboard from H
 
 // * grid variables
 const width = 10;
-const totalCells = width * width;
+const totalCells = width * width; // the grid is going to be 10 x 10 cells
+let slitherAutomatically = []; // This is the array in which we will insert the most recent keystroke and use it to determine which direction the snake should head automatically
+const lastElement = slitherAutomatically.slice(-1); // grabs last keystroke in slitherAutomatically array
 
 
 // * game variables
@@ -82,7 +84,7 @@ function keyDown() {
 
 
 
-//* Make Snake move automatically
+//* Make Snake move automatically in the direction it's already headed
 function snakeSlithers() {
   const slithering = setInterval(() => {
     //* Make snake move automatically by using a forEach loop to add 1 cells to every item in array
@@ -90,9 +92,26 @@ function snakeSlithers() {
       if (snakePosition[i]){
       console.log(snakePosition[i]);
       cells[snakePosition[i]].classList.remove('snake');
-      snakePosition[i] += 1;
-      // change slither function to add 1 to the last key 
-      // when you push key put it into array and check whatever last item in array is and then  use multiple if statements to move according to last key direction
+
+      ///****LOOK AT CODE HERE: Change change slither function to add 1 to the last key in the direction snake is headed. When you press key it will record it into slitherAutomatically array and then check whatever last item in array is through the lastElement constant. It will then  use multiple if statements to move  the snake automatically according to last key direction.
+
+      // snakePosition[i] += 1; // change slither function to add 1 to the last key in the direction snake is headed
+      //?should i use document event listener keyup?. look at key code above and use const key
+                //   // KEYS
+                //   document.addEventListener('keyup', (event) => {
+                //   const key = event.code;
+                //       slitherAutomatically.push(key); // Push last key pressed into slitherAutomatically array
+                //   if (lastElement === 'ArrowLeft') {
+                //      snakePosition[i] -= 1;
+                //   } else if (lastElement === 'ArrowRight') { 
+                //      snakePosition[i] += 1;
+                //   } else if (lastElement === 'ArrowUp') { 
+                //      snakePosition[i] -= width;
+                //   } else if (lastElement === 'ArrowDown'){ 
+                //   snakePosition[i] += width;
+                // }
+      //*** FINISH CODE IN QUESTION */
+      
       cells[snakePosition[i]].classList.add('snake');
     } else {
      clearInterval(slithering); //! figure out where this goes
