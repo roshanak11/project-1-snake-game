@@ -111,7 +111,7 @@ function snakeSlithers() {
                 //   snakePosition[i] += width;
                 // }
       //*** FINISH CODE IN QUESTION */
-      
+
       cells[snakePosition[i]].classList.add('snake');
     } else {
      clearInterval(slithering); //! figure out where this goes
@@ -203,45 +203,6 @@ snakeSlithers();
 // * Snake speeds up as it eats more
 
 
-//!!! NONE OF THIS WORKS
-//! TO DO FIRST
-//! snake has to move automayically, not just with keyboard stroke!
-//! snake has to move with intervals, like the yellow dancefloor but instea dof randomly generating it'll pull numbers from array
-//! and within interval remove the snake from where it is and change the numbers 
-//! have your interval and inside it remove snake and think of how to change snake position array
-//* for increasing speed turn this into if statement for if snake positon = apple postion
-// const moveOneCell = (value) => {
-//   return value + 1;
-// }
-// console.log(snakePosition.map(moveOneCell));
-
-
-
-
-// // !Not working yet
-// // * Score and Snake Size increase after eating fruit
-// let snakeSize = 5;
-// let score = 0;
-
-// const snakeEatsFruit = () => {
-//   score = score + 10;// iterate score  
-//   snakeSize = 5 + snake; // when snake eats a fruit
-// }
-
-
-// for (let i = 0; i < snakePosition.length; i++) { 
-// }
-
-
-// //? Speed gets faster after Snake eats fruit 
-// let speed = 2;
-
-// function snakeWinning() {
-//   console.log('Snake ate a fruit and is moving more quickly');
-//   setTimeout(snakeWinning, 1000/speed); // Snake moves more quickly after it eats fruit
-// }
-
-// snakeWinning();
 
 // //? if snake hits itself
 // // if snake[i] ==== snake[0] || snake[1] || snake[2]
