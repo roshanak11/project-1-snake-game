@@ -190,7 +190,7 @@ fruitLocation();
 
 
 
-//* Make Snake move automatically
+//* Make Snake move automatically, call function.
 snakeSlithers();
 
 
@@ -198,9 +198,9 @@ snakeSlithers();
 
 
 // ## MVP Requirements
-// * The snake should be able to eat food to grow bigger snake.length + 2?
+// // * The snake should be able to eat food to grow bigger snake.length + 2?
 // * The game should end when the snake hits the wall or itself //! POPUP GAME OVER
-// * Snake speeds up as it eats more
+// // * Snake speeds up as it eats more
 
 
 
