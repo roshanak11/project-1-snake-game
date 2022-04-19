@@ -114,10 +114,48 @@ function snakeSlithers() {
         } else if (snakeMovement === 'ArrowDown' && colPosition < width - 1) {
           keyDown();
           //!Put in alert saying GAME OVER
+        } else {
+         alert("Alert Text!");
         }
 
+        // // // !put in alert saying game over, not working
+        // if (snakeMovement === rowPosition < width - 1) {
+        //   alert("Alert Text!");
+        //   keyRight();
+        //   //!Put in alert saying GAME OVER
+        // } else if (snakeMovement === rowPosition > 0) {
+        //  keyLeft();
+        //  //!Put in alert saying GAME OVER
+        // } else if (snakeMovement === colPosition > 0) {
+        //   keyUp();
+        //   //!Put in alert saying GAME OVER
+        // } else if (snakeMovement === colPosition < width - 1) {
+        //   keyDown();
+        //   //!Put in alert saying GAME OVER
+        // }
 
 
+        if (
+          (snakePosition[0] === snakePosition[1])
+           || 
+           (snakePosition[0] === snakePosition[2])
+            || 
+            (snakePosition[0] === snakePosition[3])
+             || 
+             (snakePosition[0] === snakePosition[4]) 
+             || 
+             (snakePosition[0] === snakePosition[5]) 
+             || 
+             (snakePosition[0] === snakePosition[6])
+              || 
+              (snakePosition[0] === snakePosition[7])
+               || 
+               (snakePosition[0] === snakePosition[8]) 
+               || 
+               (snakePosition[0] === snakePosition[9])) {
+          console.log('game over');
+          alert("Game over!");
+        }
 
 
      // This part of code speeds up snake and makes tail grow longer as it eats fruit   
@@ -138,6 +176,7 @@ function snakeSlithers() {
     } else if (speed === 1000) {
        clearInterval(slithering); // it stops the snake from moving once the speed is 1000
        console.log("You win!");
+      //  alert("You win!");
     }
     //!SNAKE SPEED ENDS
         //! add innerhTML to score/points +10, use the ${} js thingy
@@ -159,9 +198,19 @@ document.addEventListener('keyup', (event) => {
 })
  
 
-// // End game if snake hits itself
-// if (snakePosition[0] === snakePosition[1] || snakePosition[2] || snakePosition[3] || snakePosition[4] || snakePosition[5] || snakePosition[6] || snakePosition[7] || snakePosition[8] || snakePosition[9])
-//  {console.log('game over')}
+//! End game if snake hits itself
+// snakePosition.forEach(pos => {
+//   if (snakePosition[0] === pos){
+//     alert("Game over!")
+//   }
+// })
+
+
+// snakePosition.forEach(pos => {
+//   is snakePosition[0] the same as pos?
+// })
+
+
 
 // //! Fruit cannot land on snake
 // notInSameCell();
@@ -174,7 +223,7 @@ function fruitLocation() {
     cells[fruitPosition].classList.remove('fruit');
     fruitPosition = Math.floor(Math.random() * cells.length); 
     cells[fruitPosition].classList.add('fruit');
-  }, 5000);
+  }, 20000);
 }
 
 
@@ -188,7 +237,7 @@ snakeSlithers();
 
 
 
-
+//! snake should move as quickly as keybaord movement: bug
 
 
 // ## MVP Requirements
@@ -199,22 +248,6 @@ snakeSlithers();
 
 
 // //? if snake hits itself
-// // if snake[i] ==== snake[0] || snake[1] || snake[2]
-// //return console.log("Game over!"); but have it as a popup 
-// let text = '';
-// for (let i = 0; i > 500; i++) {
-//   text =+ "the number is " + i;
-//   remove snake
-//   give cells css a color of green
-//   add snake\
-//   console.log(text)
-//   if (i > 2){
-//     console.log(i);
-//   }
-//   if snakelocation = snakelocation || apple location || outside grid{
-//     popup GAME OVER
-//   }
-// }
 
 // //? score
 // let score = 0;
