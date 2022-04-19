@@ -17,17 +17,17 @@ let snakeMovement = 'ArrowRight'; // Snake will automatically move to the right.
 //! const notInSameCell = (snakePosition !== fruitPosition); //  Fruit cannot land on snake cell
 
 // * game variables
-let snakePosition = [55, 54, 53]; 
+let snakePosition = [55, 54, 53];
 let fruitPosition = Math.floor(Math.random() * totalCells);
 let speed = 2000;
 
-function addSnake () {
+function addSnake() {
   snakePosition.map(position => {
     cells[position].classList.add('snake');
   })
 }
 
-function removeSnake () {
+function removeSnake() {
   snakePosition.map(position => {
     cells[position].classList.remove('snake');
   })
@@ -52,43 +52,43 @@ function keyRight() {
   console.log("pressed");
   removeSnake(); // remove old snake array
   console.log(snakePosition);
-    let head = snakePosition[0]; // access head location of snake array
-    console.log(snakePosition);
-    console.log(head);
-    head += 1; // move head of snake one cell to the right 
-    console.log(head);
-    console.log(snakePosition);
-    snakePosition.unshift(head); // removes old index 0 value of head array
-    console.log(snakePosition);
-    snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
-    console.log(snakePosition);
+  let head = snakePosition[0]; // access head location of snake array
+  console.log(snakePosition);
+  console.log(head);
+  head += 1; // move head of snake one cell to the right 
+  console.log(head);
+  console.log(snakePosition);
+  snakePosition.unshift(head); // removes old index 0 value of head array
+  console.log(snakePosition);
+  snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
+  console.log(snakePosition);
   addSnake(); // add new snake array onto new location of grid
 }
 
 function keyLeft() {
   removeSnake(); // remove old snake array
-    let head = snakePosition[0]; // access head location of snake array
-    head -= 1; // move head of snake one cell to the left 
-    snakePosition.unshift(head); // removes old index 0 value of head array
-    snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
+  let head = snakePosition[0]; // access head location of snake array
+  head -= 1; // move head of snake one cell to the left 
+  snakePosition.unshift(head); // removes old index 0 value of head array
+  snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
   addSnake(); // add new snake array onto new location of grid
 }
 
 function keyUp() {
   removeSnake(); // remove old snake array
-    let head = snakePosition[0]; // access head location of snake array
-    head -= width; // move head of snake one cell up 
-    snakePosition.unshift(head); // removes old index 0 value of head array
-    snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
+  let head = snakePosition[0]; // access head location of snake array
+  head -= width; // move head of snake one cell up 
+  snakePosition.unshift(head); // removes old index 0 value of head array
+  snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
   addSnake(); // add new snake array onto new location of grid
 }
 
 function keyDown() {
   removeSnake(); // remove old snake array
-    let head = snakePosition[0]; // access head location of snake array
-    head += width; // move head of snake one cell down
-    snakePosition.unshift(head); // removes old index 0 value of head array
-    snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
+  let head = snakePosition[0]; // access head location of snake array
+  head += width; // move head of snake one cell down
+  snakePosition.unshift(head); // removes old index 0 value of head array
+  snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
   addSnake(); // add new snake array onto new location of grid
 }
 
@@ -96,76 +96,72 @@ function keyDown() {
 //* Make Snake move automatically in the direction it's already headed
 function snakeSlithers() {
   const slithering = setInterval(() => {
-    console.log(snakeMovement === 'ArrowRight'); 
-      //Use multiple if statements to move the snake automatically according to last key direction.
-      const rowPosition = snakePosition[0] % width; //This code stops the snake from going through the wall on the left and right side of the grid
-      const colPosition = Math.floor(snakePosition[0] / width); //This code also stops the snake from going through the wall on the top and bottom of the grid
-      console.log(rowPosition);
-        if (snakeMovement === 'ArrowRight' &&  rowPosition < width - 1) {
-          keyRight();
-        } else if (snakeMovement === 'ArrowLeft' && rowPosition > 0) {
-         keyLeft();
-        } else if (snakeMovement === 'ArrowUp' && colPosition > 0) {
-          keyUp();
-        } else if (snakeMovement === 'ArrowDown' && colPosition < width - 1) {
-          keyDown();
-        } else {
-         alert("Game Over!"); // if snake hits the wall, a pop-up alert will state "Game Over!"
-        }
+    console.log(snakeMovement === 'ArrowRight');
+    //Use multiple if statements to move the snake automatically according to last key direction.
+    const rowPosition = snakePosition[0] % width; //This code stops the snake from going through the wall on the left and right side of the grid
+    const colPosition = Math.floor(snakePosition[0] / width); //This code also stops the snake from going through the wall on the top and bottom of the grid
+    console.log(rowPosition);
+    if (snakeMovement === 'ArrowRight' && rowPosition < width - 1) {
+      keyRight();
+    } else if (snakeMovement === 'ArrowLeft' && rowPosition > 0) {
+      keyLeft();
+    } else if (snakeMovement === 'ArrowUp' && colPosition > 0) {
+      keyUp();
+    } else if (snakeMovement === 'ArrowDown' && colPosition < width - 1) {
+      keyDown();
+    } else {
+      alert("Game Over!"); // if snake hits the wall, a pop-up alert will state "Game Over!"
+    }
 
-      //The game should have a pop-up saying "Game Over!" when the snake hits itself
-        if (
-          (snakePosition[0] === snakePosition[1])
-           || 
-           (snakePosition[0] === snakePosition[2])
-            || 
-            (snakePosition[0] === snakePosition[3])
-             || 
-             (snakePosition[0] === snakePosition[4]) 
-             || 
-             (snakePosition[0] === snakePosition[5]) 
-             || 
-             (snakePosition[0] === snakePosition[6])
-              || 
-              (snakePosition[0] === snakePosition[7])
-               || 
-               (snakePosition[0] === snakePosition[8]) 
-               || 
-               (snakePosition[0] === snakePosition[9])) {
-          console.log('game over');
-          alert("Game over!");
-        }
-        // * For future reference, use a forEach loop to stop snake hitting itself. Nick's example:
-      //   snakePosition.forEach(pos => {
-      //     is snakePosition[0] the same as pos?
-      // })
+    //The game should have a pop-up saying "Game Over!" when the snake hits itself
+    if (
+      (snakePosition[0] === snakePosition[1])
+      ||
+      (snakePosition[0] === snakePosition[2])
+      ||
+      (snakePosition[0] === snakePosition[3])
+      ||
+      (snakePosition[0] === snakePosition[4])
+      ||
+      (snakePosition[0] === snakePosition[5])
+      ||
+      (snakePosition[0] === snakePosition[6])
+      ||
+      (snakePosition[0] === snakePosition[7])
+      ||
+      (snakePosition[0] === snakePosition[8])
+      ||
+      (snakePosition[0] === snakePosition[9])) {
+      console.log('game over');
+      alert("Game over!");
+    }
 
 
-     // This part of code speeds up snake and makes tail grow longer as it eats fruit   
-      console.log('snakePosition: ', snakePosition);
-      console.log('fruitPosition: ', fruitPosition);
-      if(snakePosition[0] === fruitPosition){
-        console.log('collisionPoints');
-        // scoreboard.innerHTML += 10 + 'points';
-        cells[fruitPosition].classList.remove('fruit');
-        snakePosition.push(snakePosition.slice(-1)); // grabs last item of array and then pushes it to make tail grow by 1 cell when it eats the fruit
-        console.log(snakePosition);
-    //* Snake speed will increase each time it eats the fruit
-      if (snakePosition[0] === fruitPosition){
+    // This part of code speeds up snake and makes tail grow longer as it eats fruit   
+    console.log('snakePosition: ', snakePosition);
+    console.log('fruitPosition: ', fruitPosition);
+    if (snakePosition[0] === fruitPosition) {
+      console.log('collisionPoints');
+      // scoreboard.innerHTML += 10 + 'points';
+      cells[fruitPosition].classList.remove('fruit');
+      snakePosition.push(snakePosition.slice(-1)); // grabs last item of array and then pushes it to make tail grow by 1 cell when it eats the fruit
+      console.log(snakePosition);
+      //* Snake speed will increase each time it eats the fruit
+      if (snakePosition[0] === fruitPosition) {
         clearInterval(slithering);
         speed = speed - 100;
         snakeSlithers();
         console.log("The speed is now " + speed);
-    } else if (speed === 1000) {
-       clearInterval(slithering); // it stops the snake from moving once the speed is 1000
-       console.log("You win!");
-      //  alert("You win!");
-    }
-    //*Snake speed code ends
-        //! add innerhTML to score/points +10, use the ${} js thingy
-        //! turn this into a function, then append the function to make snake grow longer and add points
+      } else if (speed === 1000) {
+        clearInterval(slithering); // it stops the snake from moving once the speed is 1000
+        console.log("You win!");
+        //  alert("You win!");
       }
-      addSnake(snakePosition); // add snake back at the new position
+      //*Snake speed code ends
+      //! add innerhTML to score/points +10, use the ${} js thingy
+      //! turn this into a function, then append the function to make snake grow longer and add points
+    }
+    addSnake(snakePosition); // add snake back at the new position
   }, speed);
 }
 
@@ -179,7 +175,7 @@ document.addEventListener('keyup', (event) => {
   console.log(key);
   snakeMovement = key;
 })
- 
+
 
 
 // //! Fruit cannot land on snake
@@ -194,7 +190,7 @@ document.addEventListener('keyup', (event) => {
 function fruitLocation() {
   setInterval(() => {
     cells[fruitPosition].classList.remove('fruit');
-    fruitPosition = Math.floor(Math.random() * cells.length); 
+    fruitPosition = Math.floor(Math.random() * cells.length);
     cells[fruitPosition].classList.add('fruit');
   }, 20000);
 }
@@ -218,3 +214,17 @@ snakeSlithers();
 // // function scoreUpdate(){
 // //   innertext.html = "score" += score
 // // }
+
+
+
+
+
+// In your function to win your game:
+// localStorage.setItem('level', 2)
+// window.location.reload() // this will refresh your page
+// Then when your game first starts:
+// const level = Number(localStorage.getItem('level')) || 1
+
+// if (level === 2) {
+//    // Set whatever variables you'd like to set for your second level.   
+// }
