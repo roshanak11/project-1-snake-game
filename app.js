@@ -16,7 +16,7 @@ let snakePosition = [55, 54, 53];
 //! snakeSpeed = 10 make speed a variable and you can manipulate it everytime it gets a fruit
 //! if statement snake can't be on fruit
 let fruitPosition = Math.floor(Math.random() * totalCells);
-let speed = 4000;
+let speed = 2000;
 
 function addSnake () {
   snakePosition.map(position => {
@@ -99,9 +99,9 @@ function snakeSlithers() {
   const slithering = setInterval(() => {
     console.log(snakeMovement === 'ArrowRight');
     //* Make snake move automatically by using a forEach loop to add 1 cells to every item in array
-    for (i = 0; i < snakePosition.length; i++) {
-      if (snakePosition[i]){
-      console.log(snakePosition[i]);
+    // for (i = 0; i < snakePosition.length; i++) {
+      // if (snakePosition[i]){
+      // console.log(snakePosition[i]);
 
       ///****LOOK AT CODE HERE: Use multiple if statements to move the snake automatically according to last key direction.
         if (snakeMovement === 'ArrowRight') {
@@ -126,22 +126,21 @@ function snakeSlithers() {
         snakePosition.push(snakePosition.slice(-1)); // grabs last item of array and then pushes it to make tail grow by 1 cell when it eats the fruit
         console.log(snakePosition);
     //! SNAKE WILL SPEED UP WHEN IT EATS FRUIT, turn this into a loop
-      if (snakePosition[0] === fruitPosition && speed > 1000){
-      speed = speed - 100;
-    slithering = setInterval(snakeSlithers, speed);
-      console.log("The speed is now " + speed);
+      if (snakePosition[0] === fruitPosition){
+        clearInterval(slithering);
+        speed = speed - 100;
+        snakeSlithers();
+        console.log("The speed is now " + speed);
     } else if (speed === 1000) {
-      clearInterval(slithering); // it stops the snake from moving once the speed is 1000
-      console.log("You win!");
+       clearInterval(slithering); // it stops the snake from moving once the speed is 1000
+       console.log("You win!");
     }
     //!SNAKE SPEED ENDS
         //! add innerhTML to score/points +10, use the ${} js thingy
         //! turn this into a function, then append the function to make snake grow longer and add points
       }
       addSnake(snakePosition); // ! add snake back at the new position
-    }
-    }
-  }, 1000);
+  }, speed);
 }
 
 
@@ -168,7 +167,7 @@ function fruitLocation() {
     cells[fruitPosition].classList.remove('fruit');
     fruitPosition = Math.floor(Math.random() * cells.length); 
     cells[fruitPosition].classList.add('fruit');
-  }, 4000);
+  }, 10000);
 }
 
 
