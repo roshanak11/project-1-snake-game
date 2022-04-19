@@ -1,3 +1,9 @@
+## MVP Requirements
+// * The snake should be able to eat food to grow bigger snake.length
+//* The game should end when the snake hits the wall or itself 
+// * Snake speeds up as it eats more
+
+
 // * Dom Elements
 const grid = document.querySelector('.grid');
 // const snake = document.querySelector('.snake');
@@ -12,8 +18,6 @@ let snakeMovement = 'ArrowRight'; // Snake will automatically move to the right.
 
 // * game variables
 let snakePosition = [55, 54, 53]; 
-//! snakeSpeed = 10 make speed a variable and you can manipulate it everytime it gets a fruit
-//! if statement snake can't be on fruit
 let fruitPosition = Math.floor(Math.random() * totalCells);
 let speed = 2000;
 
@@ -89,52 +93,27 @@ function keyDown() {
 }
 
 
-// document.addEventListener('keyup', (event) => {
-//   snakeMovement = event.code;
-// }
-
 //* Make Snake move automatically in the direction it's already headed
 function snakeSlithers() {
   const slithering = setInterval(() => {
     console.log(snakeMovement === 'ArrowRight'); 
       //Use multiple if statements to move the snake automatically according to last key direction.
-      //! MVP GOAL: The game should end when the snake hits the wall or ITSELF
       const rowPosition = snakePosition[0] % width; //This code stops the snake from going through the wall on the left and right side of the grid
       const colPosition = Math.floor(snakePosition[0] / width); //This code also stops the snake from going through the wall on the top and bottom of the grid
       console.log(rowPosition);
         if (snakeMovement === 'ArrowRight' &&  rowPosition < width - 1) {
           keyRight();
-          //!Put in alert saying GAME OVER
         } else if (snakeMovement === 'ArrowLeft' && rowPosition > 0) {
          keyLeft();
-         //!Put in alert saying GAME OVER
         } else if (snakeMovement === 'ArrowUp' && colPosition > 0) {
           keyUp();
-          //!Put in alert saying GAME OVER
         } else if (snakeMovement === 'ArrowDown' && colPosition < width - 1) {
           keyDown();
-          //!Put in alert saying GAME OVER
         } else {
-         alert("Alert Text!");
+         alert("Game Over!"); // if snake hits the wall, a pop-up alert will state "Game Over!"
         }
 
-        // // // !put in alert saying game over, not working
-        // if (snakeMovement === rowPosition < width - 1) {
-        //   alert("Alert Text!");
-        //   keyRight();
-        //   //!Put in alert saying GAME OVER
-        // } else if (snakeMovement === rowPosition > 0) {
-        //  keyLeft();
-        //  //!Put in alert saying GAME OVER
-        // } else if (snakeMovement === colPosition > 0) {
-        //   keyUp();
-        //   //!Put in alert saying GAME OVER
-        // } else if (snakeMovement === colPosition < width - 1) {
-        //   keyDown();
-        //   //!Put in alert saying GAME OVER
-        // }
-
-
+      //The game should have a pop-up saying "Game Over!" when the snake hits itself
         if (
           (snakePosition[0] === snakePosition[1])
            || 
@@ -156,6 +135,10 @@ function snakeSlithers() {
           console.log('game over');
           alert("Game over!");
         }
+        // * For future reference, use a forEach loop to stop snake hitting itself. Nick's example:
+      //   snakePosition.forEach(pos => {
+      //     is snakePosition[0] the same as pos?
+      // })
 
 
      // This part of code speeds up snake and makes tail grow longer as it eats fruit   
@@ -167,7 +150,7 @@ function snakeSlithers() {
         cells[fruitPosition].classList.remove('fruit');
         snakePosition.push(snakePosition.slice(-1)); // grabs last item of array and then pushes it to make tail grow by 1 cell when it eats the fruit
         console.log(snakePosition);
-    //! SNAKE WILL SPEED UP WHEN IT EATS FRUIT, turn this into a loop
+    //* Snake speed will increase each time it eats the fruit
       if (snakePosition[0] === fruitPosition){
         clearInterval(slithering);
         speed = speed - 100;
@@ -178,11 +161,11 @@ function snakeSlithers() {
        console.log("You win!");
       //  alert("You win!");
     }
-    //!SNAKE SPEED ENDS
+    //*Snake speed code ends
         //! add innerhTML to score/points +10, use the ${} js thingy
         //! turn this into a function, then append the function to make snake grow longer and add points
       }
-      addSnake(snakePosition); // ! add snake back at the new position
+      addSnake(snakePosition); // add snake back at the new position
   }, speed);
 }
 
@@ -198,22 +181,12 @@ document.addEventListener('keyup', (event) => {
 })
  
 
-//! End game if snake hits itself
-// snakePosition.forEach(pos => {
-//   if (snakePosition[0] === pos){
-//     alert("Game over!")
-//   }
-// })
-
-
-// snakePosition.forEach(pos => {
-//   is snakePosition[0] the same as pos?
-// })
-
-
 
 // //! Fruit cannot land on snake
 // notInSameCell();
+
+
+//! snake should move as quickly as keybaord movement: bug
 
 
 //!Fruit should start in random position but shouldn't move all the time. It should refresh after snake eats fruit. if (fruitPosition === snakePosition)/ maybe move interval
@@ -236,19 +209,6 @@ snakeSlithers();
 
 
 
-
-//! snake should move as quickly as keybaord movement: bug
-
-
-// ## MVP Requirements
-// // * The snake should be able to eat food to grow bigger snake.length + 2?
-// * The game should end when the snake hits the wall or itself //! POPUP GAME OVER
-// // * Snake speeds up as it eats more
-
-
-
-// //? if snake hits itself
-
 // //? score
 // let score = 0;
 // score += 10;
@@ -258,7 +218,3 @@ snakeSlithers();
 // // function scoreUpdate(){
 // //   innertext.html = "score" += score
 // // }
-
-
-///? COLLISION DETECTION HITS WALL OR ITSELF
-//? APPLE CANNOT BE SAME POSITION AS SNAKE
