@@ -8,8 +8,7 @@ const scoreboard = document.querySelector('.score'); // select scoreboard from H
 const width = 10;
 const totalCells = width * width; // the grid is going to be 10 x 10 cells
 let snakeMovement = 'ArrowRight'; // Snake will automatically move to the right. Later in the game, we will change the automatic direction of the snake based on the last movement of the player's keystrooke.
-
-
+//! const notInSameCell = (snakePosition !== fruitPosition); //  Fruit cannot land on snake cell
 
 // * game variables
 let snakePosition = [55, 54, 53]; 
@@ -97,23 +96,41 @@ function keyDown() {
 //* Make Snake move automatically in the direction it's already headed
 function snakeSlithers() {
   const slithering = setInterval(() => {
-    console.log(snakeMovement === 'ArrowRight');
-    //* Make snake move automatically by using a forEach loop to add 1 cells to every item in array
-    // for (i = 0; i < snakePosition.length; i++) {
-      // if (snakePosition[i]){
-      // console.log(snakePosition[i]);
-
+    console.log(snakeMovement === 'ArrowRight'); 
       ///****LOOK AT CODE HERE: Use multiple if statements to move the snake automatically according to last key direction.
-        if (snakeMovement === 'ArrowRight') {
+      const rowPosition = snakePosition[0] % width;
+      const colPosition = Math.floor(snakePosition[0] / width);
+      console.log(rowPosition);
+        if (snakeMovement === 'ArrowRight' &&  rowPosition < width - 1) {
           keyRight();
-        } else if (snakeMovement === 'ArrowLeft') {
+          //!Put in alert saying GAME OVER
+        } else if (snakeMovement === 'ArrowLeft' && rowPosition > 0) {
          keyLeft();
-        } else if (snakeMovement === 'ArrowUp') {
+         //!Put in alert saying GAME OVER
+        } else if (snakeMovement === 'ArrowUp' && colPosition > 0)) {
           keyUp();
-        } else if (snakeMovement === 'ArrowDown') {
+          //!Put in alert saying GAME OVER
+        } else if (snakeMovement === 'ArrowDown' && colPosition < width - 1) {
           keyDown();
+          //!Put in alert saying GAME OVER
         }
 
+        //! MVP GOAL: The game should end when the snake hits the wall or itself 
+// //*This code stops the snake from going through the wall
+// //Stop the snake from moving off the board on the right or left
+// const rowPosition = snakePosition[0] % width;
+// if (rowPosition < width - 1) {
+//   keyRight();
+// } else if (rowPosition > 0) {
+//   keyLeft(); 
+// } 
+// //Stop the snake from moving off the board on the top or bottom
+// const colPosition = Math.floor(snakePosition / width);
+// if (colPosition > 0) {
+//   keyUp();
+// } else if (colPosition < width - 1) {
+//   keyDown();
+// }
 
 
      // This part of code speeds up snake and makes tail grow longer as it eats fruit   
@@ -147,27 +164,27 @@ function snakeSlithers() {
 
 
 //* Keyboard strokes move the snake
-
 document.addEventListener('keyup', (event) => {
-
-// removeSnake(snakePosition); // ! remove snake from the current position
   // ! Get the key the user pressed
   const key = event.code;
   console.log(key);
   snakeMovement = key;
-
 })
  
 
+// // End game if snake hits itself
+// if (snakePosition[0] === snakePosition[1] || snakePosition[2] || snakePosition[3] || snakePosition[4] || snakePosition[5] || snakePosition[6] || snakePosition[7] || snakePosition[8] || snakePosition[9])
+//  {console.log('game over')}
 
 
+//!Fruit should start in random position but shouldn't move all the time. It should refresh after snake eats fruit. if (fruitPosition === snakePosition)/ maybe move interval
 //*Fruit moves around the board randomly
 function fruitLocation() {
   setInterval(() => {
     cells[fruitPosition].classList.remove('fruit');
     fruitPosition = Math.floor(Math.random() * cells.length); 
     cells[fruitPosition].classList.add('fruit');
-  }, 10000);
+  }, 5000);
 }
 
 
@@ -177,6 +194,9 @@ fruitLocation();
 
 //* Make Snake move automatically, call function.
 snakeSlithers();
+
+// //! Fruit cannot land on snake
+// notInSameCell();
 
 
 
