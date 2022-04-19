@@ -7,8 +7,8 @@ const scoreboard = document.querySelector('.score'); // select scoreboard from H
 // * grid variables
 const width = 10;
 const totalCells = width * width; // the grid is going to be 10 x 10 cells
-let slitherAutomatically = []; // This is the array in which we will insert the most recent keystroke and use it to determine which direction the snake should head automatically
-const lastElement = slitherAutomatically.slice(-1); // grabs last keystroke in slitherAutomatically array
+let snakeMovement = 'ArrowRight'; // Snake will automatically move to the right. Later in the game, we will change the automatic direction of the snake based on the last movement of the player's keystrooke.
+
 
 
 // * game variables
@@ -48,10 +48,17 @@ createGrid();
 function keyRight() {
   console.log("pressed");
   removeSnake(); // remove old snake array
+  console.log(snakePosition);
     let head = snakePosition[0]; // access head location of snake array
+    console.log(snakePosition);
+    console.log(head);
     head += 1; // move head of snake one cell to the right 
+    console.log(head);
+    console.log(snakePosition);
     snakePosition.unshift(head); // removes old index 0 value of head array
+    console.log(snakePosition);
     snakePosition.pop(); // removes last index value of snake array so that snake tail moves along
+    console.log(snakePosition);
   addSnake(); // add new snake array onto new location of grid
 }
 
@@ -83,41 +90,58 @@ function keyDown() {
 }
 
 
+// document.addEventListener('keyup', (event) => {
+//   snakeMovement = event.code;
+// }
 
 //* Make Snake move automatically in the direction it's already headed
 function snakeSlithers() {
   const slithering = setInterval(() => {
+    console.log(snakeMovement === 'ArrowRight');
     //* Make snake move automatically by using a forEach loop to add 1 cells to every item in array
     for (i = 0; i < snakePosition.length; i++) {
       if (snakePosition[i]){
       console.log(snakePosition[i]);
-      cells[snakePosition[i]].classList.remove('snake');
 
-      ///****LOOK AT CODE HERE: Change change slither function to add 1 to the last key in the direction snake is headed. When you press key it will record it into slitherAutomatically array and then check whatever last item in array is through the lastElement constant. It will then  use multiple if statements to move  the snake automatically according to last key direction.
+      ///****LOOK AT CODE HERE: Use multiple if statements to move the snake automatically according to last key direction.
+        if (snakeMovement === 'ArrowRight') {
+          keyRight();
+        } else if (snakeMovement === 'ArrowLeft') {
+         keyLeft();
+        } else if (snakeMovement === 'ArrowUp') {
+          keyUp();
+        } else if (snakeMovement === 'ArrowDown') {
+          keyDown();
+        }
 
-      // snakePosition[i] += 1; // change slither function to add 1 to the last key in the direction snake is headed
-      //?should i use document event listener keyup?. look at key code above and use const key
-                //   // KEYS
-                //   document.addEventListener('keyup', (event) => {
-                //   const key = event.code;
-                //       slitherAutomatically.push(key); // Push last key pressed into slitherAutomatically array
-                //   if (lastElement === 'ArrowLeft') {
-                //      snakePosition[i] -= 1;
-                //   } else if (lastElement === 'ArrowRight') { 
-                //      snakePosition[i] += 1;
-                //   } else if (lastElement === 'ArrowUp') { 
-                //      snakePosition[i] -= width;
-                //   } else if (lastElement === 'ArrowDown'){ 
-                //   snakePosition[i] += width;
-                // }
-      //*** FINISH CODE IN QUESTION */
 
-      cells[snakePosition[i]].classList.add('snake');
-    } else {
-     clearInterval(slithering); //! figure out where this goes
+
+     // This part of code speeds up snake and makes tail grow longer as it eats fruit   
+      console.log('snakePosition: ', snakePosition);
+      console.log('fruitPosition: ', fruitPosition);
+      if(snakePosition[0] === fruitPosition){
+        console.log('collisionPoints');
+        // scoreboard.innerHTML += 10 + 'points';
+        cells[fruitPosition].classList.remove('fruit');
+        snakePosition.push(snakePosition.slice(-1)); // grabs last item of array and then pushes it to make tail grow by 1 cell when it eats the fruit
+        console.log(snakePosition);
+    //! SNAKE WILL SPEED UP WHEN IT EATS FRUIT, turn this into a loop
+      if (snakePosition[0] === fruitPosition && speed > 1000){
+      speed = speed - 100;
+    slithering = setInterval(snakeSlithers, speed);
+      console.log("The speed is now " + speed);
+    } else if (speed === 1000) {
+      clearInterval(slithering); // it stops the snake from moving once the speed is 1000
+      console.log("You win!");
+    }
+    //!SNAKE SPEED ENDS
+        //! add innerhTML to score/points +10, use the ${} js thingy
+        //! turn this into a function, then append the function to make snake grow longer and add points
+      }
+      addSnake(snakePosition); // ! add snake back at the new position
     }
     }
-  }, 4000);
+  }, 1000);
 }
 
 
@@ -131,50 +155,12 @@ document.addEventListener('keyup', (event) => {
   // ! Get the key the user pressed
   const key = event.code;
   console.log(key);
+  snakeMovement = key;
 
-  //!should remove this
-  // ! rowPosition and colPosition
-  // const rowPosition = snakePosition % width;
-  // const colPosition = Math.floor(snakePosition / width);
-
-
-  if (key === 'ArrowLeft') { // && rowPosition > 0) { // ! Left. ADD NICK's FUNCTION HERE
-    keyLeft();
-    console.log("hello");
-    // snakePosition -= 1
-  } else if (key === 'ArrowRight') { // && rowPosition < width - 1) { // ! Right
-    keyRight();
-    // snakePosition += 1
-  } else if (key === 'ArrowUp') { // && colPosition > 0) { // ! Up
-    keyUp();
-    // snakePosition -= width
-  } else if (key === 'ArrowDown'){ // && colPosition < width - 1) { // ! Down
-    keyDown();
-    // snakePosition += width
-  }
-  console.log('snakePosition: ', snakePosition);
-  console.log('fruitPosition: ', fruitPosition);
-  if(snakePosition[0] === fruitPosition){
-    console.log('collisionPoints');
-    // scoreboard.innerHTML += 10 + 'points';
-    cells[fruitPosition].classList.remove('fruit');
-    snakePosition.length += 1;    //Snake tail (array) gets longer by 2 cells when it eats fruit
-//! SNAKE WILL SPEED UP WHEN IT EATS FRUIT, turn this into a loop
-  if (snakePosition[0] === fruitPosition && speed > 1000){
-  clearInterval(slithering); //! figure out where to put this later
-  speed = speed - 1000;
-slithering = setInterval(snakeSlithers, speed);
-  console.log("The speed is now " + speed);
-} else if (speed === 1000) {
-  clearInterval(slithering); //! figure out where to put this later
-  console.log("You win!");
-}
-//!SNAKE SPEED ENDS
-    //! add innerhTML to score/points +10, use the ${} js thingy
-    //! turn this into a function, then append the function to make snake grow longer and add points
-  }
-  addSnake(snakePosition); // ! add snake back at the new position
 })
+ 
+
+
 
 //*Fruit moves around the board randomly
 function fruitLocation() {
