@@ -133,7 +133,7 @@ function snakeSlithers() {
       ||
       (snakePosition[0] === snakePosition[9])) {
       console.log('game over');
-      ! alert("Game over!");
+      alert("Game over!");
     }
 
 
@@ -167,7 +167,7 @@ function snakeSlithers() {
 
 //* Keyboard strokes move the snake
 document.addEventListener('keyup', (event) => {
-  // ! Get the last key the user pressed
+  //Get the last key the user pressed
   const key = event.code;
   console.log(key);
   snakeMovement = key;
