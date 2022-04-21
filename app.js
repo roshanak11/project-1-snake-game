@@ -6,9 +6,8 @@
 
 // * Dom Elements
 const grid = document.querySelector('.grid');
-// const snake = document.querySelector('.snake');
 const cells = [];
-const scoreboard = document.querySelector('.score'); // select scoreboard from HTML
+const scoreboard = document.querySelector('.score'); //! select scoreboard from HTML
 
 // * grid variables
 const width = 10;
@@ -32,6 +31,7 @@ function removeSnake() {
   })
 }
 
+// Creates grid
 function createGrid() {
   for (let i = 0; i < totalCells; i++) {
     const cell = document.createElement('div');
@@ -164,21 +164,13 @@ function snakeSlithers() {
 }
 
 
-
-
 //* Keyboard strokes move the snake
 document.addEventListener('keyup', (event) => {
-  // ! Get the key the user pressed
+  // ! Get the last key the user pressed
   const key = event.code;
   console.log(key);
   snakeMovement = key;
 })
-
-
-// notInSameCell();
-
-
-
 
 
 
@@ -222,7 +214,6 @@ if (
     fruitPosition = Math.floor(Math.random() * totalCells);
     cells[fruitPosition].classList.add('fruit');
 }
-
 
 
 
