@@ -1,13 +1,13 @@
 // ## MVP Requirements
-// * The snake should be able to eat food to grow bigger snake.length
-//* The game should end when the snake hits the wall or itself 
+// * The snake should be able to eat food to grow bigger 
+// * The game should end when the snake hits the wall or itself 
 // * Snake speeds up as it eats more
 
 
 // * Dom Elements
-const grid = document.querySelector('.grid');
+const grid = document.querySelector('.grid'); 
 const cells = [];
-const scoreboard = document.querySelector('.score'); //! select scoreboard from HTML
+const scoreboard = document.querySelector('.score'); // select scoreboard from HTML
 
 // * grid variables
 const width = 10;
@@ -110,7 +110,7 @@ function snakeSlithers() {
     } else if (snakeMovement === 'ArrowDown' && colPosition < width - 1) {
       keyDown();
     } else {
-      alert("Game Over!"); // if snake hits the wall, a pop-up alert will state "Game Over!"
+      //! alert("Game Over!"); // if snake hits the wall, a pop-up alert will state "Game Over!"
     }
 
     //The game should have a pop-up saying "Game Over!" when the snake hits itself
@@ -133,7 +133,7 @@ function snakeSlithers() {
       ||
       (snakePosition[0] === snakePosition[9])) {
       console.log('game over');
-      alert("Game over!");
+      ! alert("Game over!");
     }
 
 
@@ -175,12 +175,17 @@ document.addEventListener('keyup', (event) => {
 
 
 
-//!Fruit should start in random position but shouldn't move all the time. It should refresh after snake eats fruit. if (fruitPosition === snakePosition)/ maybe move interval
 //*Fruit moves around the board randomly
 function fruitLocation() {
   setInterval(() => {
     cells[fruitPosition].classList.remove('fruit');
     fruitPosition = Math.floor(Math.random() * cells.length);
+
+    //This while loop only runs if the fruit lands on the snake and makes sure fruit is randomly redirected to a new location. This way the fruit does not appear to land on the snake.
+      while (cells[fruitPosition].classList.contains('snake')) {
+      fruitPosition = Math.floor(Math.random() * cells.length);
+    }
+
     cells[fruitPosition].classList.add('fruit');
   }, 10000);
 }
@@ -189,48 +194,6 @@ function fruitLocation() {
 fruitLocation();
 
 
-//! Fruit cannot land on snake
-if (
-  (fruitPosition === snakePosition[0])
-  ||
-  (fruitPosition === snakePosition[1])
-  ||
-  (fruitPosition === snakePosition[2])
-  ||
-  (fruitPosition === snakePosition[3])
-  ||
-  (fruitPosition === snakePosition[4])
-  ||
-  (fruitPosition === snakePosition[5])
-  ||
-  (fruitPosition === snakePosition[6])
-  ||
-  (fruitPosition === snakePosition[7])
-  ||
-  (fruitPosition === snakePosition[8])
-  ||
-  (fruitPosition === snakePosition[9])) {
-    console.log("fruit landed on snake");
-    cells[fruitPosition].classList.remove('fruit');
-    fruitPosition = Math.floor(Math.random() * totalCells);
-    cells[fruitPosition].classList.add('fruit');
-}
-
-
 
 //* Make Snake move automatically, call function.
 snakeSlithers();
-
-
-
-
-
-// In your function to win your game:
-// localStorage.setItem('level', 2)
-// window.location.reload() // this will refresh your page
-// Then when your game first starts:
-// const level = Number(localStorage.getItem('level')) || 1
-
-// if (level === 2) {
-//    // Set whatever variables you'd like to set for your second level.   
-// }
