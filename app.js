@@ -142,7 +142,6 @@ function snakeSlithers() {
     console.log('fruitPosition: ', fruitPosition);
     if (snakePosition[0] === fruitPosition) {
       console.log('collisionPoints');
-      // scoreboard.innerHTML += 10 + 'points';
       cells[fruitPosition].classList.remove('fruit');
       snakePosition.push(snakePosition.slice(-1)); // grabs last item of array and then pushes it to make tail grow by 1 cell when it eats the fruit
       console.log(snakePosition);
@@ -160,7 +159,6 @@ function snakeSlithers() {
         alert("You win!");
       }
       //*Snake speed code ends
-      //! add innerhTML to score/points +10, use the ${} js thingy
     }
     addSnake(snakePosition); // add snake back at the new position
   }, speed);
@@ -222,18 +220,6 @@ if (
 
 //* Make Snake move automatically, call function.
 snakeSlithers();
-
-
-
-// //? score
-// let score = 0;
-// score += 10;
-// let scoreboard = document.querySelector('#score');
-// scoreboard.innerText = (`score: ${score}`);
-
-// // function scoreUpdate(){
-// //   innertext.html = "score" += score
-// // }
 
 
 
