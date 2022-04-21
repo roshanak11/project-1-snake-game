@@ -14,6 +14,7 @@ const scoreboard = document.querySelector('.score'); // select scoreboard from H
 const width = 10;
 const totalCells = width * width; // the grid is going to be 10 x 10 cells
 let snakeMovement = 'ArrowRight'; // Snake will automatically move to the right. Later in the game, we will change the automatic direction of the snake based on the last movement of the player's keystrooke.
+//! const notInSameCell = (snakePosition !== fruitPosition); //  Fruit cannot land on snake cell
 
 // * game variables
 let snakePosition = [55, 54, 53];
@@ -154,10 +155,11 @@ function snakeSlithers() {
       } else if (speed === 1000) {
         clearInterval(slithering); // it stops the snake from moving once the speed is 1000
         console.log("You win!");
-        alert("You win!");
+        //  alert("You win!");
       }
       //*Snake speed code ends
       //! add innerhTML to score/points +10, use the ${} js thingy
+      //! turn this into a function, then append the function to make snake grow longer and add points
     }
     addSnake(snakePosition); // add snake back at the new position
   }, speed);
@@ -175,11 +177,12 @@ document.addEventListener('keyup', (event) => {
 })
 
 
+
+// //! Fruit cannot land on snake
 // notInSameCell();
 
 
-
-
+//! snake should move as quickly as keybaord movement: bug
 
 
 //!Fruit should start in random position but shouldn't move all the time. It should refresh after snake eats fruit. if (fruitPosition === snakePosition)/ maybe move interval
@@ -189,40 +192,11 @@ function fruitLocation() {
     cells[fruitPosition].classList.remove('fruit');
     fruitPosition = Math.floor(Math.random() * cells.length);
     cells[fruitPosition].classList.add('fruit');
-  }, 10000);
+  }, 20000);
 }
 
 
 fruitLocation();
-
-
-//! Fruit cannot land on snake
-if (
-  (fruitPosition === snakePosition[0])
-  ||
-  (fruitPosition === snakePosition[1])
-  ||
-  (fruitPosition === snakePosition[2])
-  ||
-  (fruitPosition === snakePosition[3])
-  ||
-  (fruitPosition === snakePosition[4])
-  ||
-  (fruitPosition === snakePosition[5])
-  ||
-  (fruitPosition === snakePosition[6])
-  ||
-  (fruitPosition === snakePosition[7])
-  ||
-  (fruitPosition === snakePosition[8])
-  ||
-  (fruitPosition === snakePosition[9])) {
-    console.log("fruit landed on snake");
-    cells[fruitPosition].classList.remove('fruit');
-    fruitPosition = Math.floor(Math.random() * totalCells);
-    cells[fruitPosition].classList.add('fruit');
-}
-
 
 
 
