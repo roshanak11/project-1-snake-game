@@ -98,13 +98,13 @@ function snakeSlithers() {
     const rowPosition = snakePosition[0] % width; //This code stops the snake from going through the wall on the left and right side of the grid
     const colPosition = Math.floor(snakePosition[0] / width); //This code also stops the snake from going through the wall on the top and bottom of the grid
     if (snakeMovement === 'ArrowRight' && rowPosition < width - 1) { // && rowPosition < width - 1 stops snake from moving through right side of grid
-      keyRight(); // call keyRight function when ArrowRight keystroke is pressed: snake moves to the right.
+      keyRight(); // call keyRight function when ArrowRight keystroke is pressed: snake head moves to the right and tail follows.
     } else if (snakeMovement === 'ArrowLeft' && rowPosition > 0) { // && rowPosition > 0 stops snake from moving through left side of grid
-      keyLeft(); // call keyLeft function when ArrowLeft keystroke is pressed: snake moves to the left.
+      keyLeft(); // call keyLeft function when ArrowLeft keystroke is pressed: snake head moves to the left and tail follows.
     } else if (snakeMovement === 'ArrowUp' && colPosition > 0) { // && colPosition > 0 stops snake from moving through bottom of grid
-      keyUp(); // call keyUp function when ArrowUp keystroke is pressed: snake moves up.
+      keyUp(); // call keyUp function when ArrowUp keystroke is pressed: snake head moves up and tail follows.
     } else if (snakeMovement === 'ArrowDown' && colPosition < width - 1) { // && colPosition < width - 1 stops snake from moving through top of grid
-      keyDown(); // call keyDown function when ArrowDown keystroke is pressed: snake moves down.
+      keyDown(); // call keyDown function when ArrowDown keystroke is pressed: snake head moves down and tail follows.
     } else {
       alert("Game Over!"); // if snake hits the wall, a pop-up alert will state "Game Over!"
     }
@@ -135,7 +135,7 @@ function snakeSlithers() {
     // This part of code speeds up snake and makes tail grow longer as it eats fruit   
     if (snakePosition[0] === fruitPosition) { // indicates snake head at index 0 landing on fruit and eating it
       cells[fruitPosition].classList.remove('fruit'); // the fruit will be removed when the snake head lands on it and eats it
-      snakePosition.push(snakePosition.slice(-1)); // grabs last item of the snakePosition array and then pushes it back to the snakePosition array to make tail grow by 1 cell when it eats the fruit.
+      snakePosition.push(snakePosition.slice(-1)); //*Snake tail grows: grabs last item of the snakePosition array and then pushes it back to the snakePosition array to make tail grow by 1 cell when it eats the fruit.
       //* Snake speed will increase each time it eats the fruit
       if (snakePosition[0] === fruitPosition) {
         clearInterval(slithering); // we clear the interval so the game does not crash
