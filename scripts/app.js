@@ -17,9 +17,8 @@ let snakeMovement = 'ArrowRight'; // Snake will automatically move to the right.
 // * game variables
 let snakePosition = [55, 54, 53];
 let fruitPosition = Math.floor(Math.random() * totalCells);
-let speed = 2000;
+let speed = 1800;
 let score = 0;
-let points = 0;
 
 function addSnake() {
   snakePosition.map(position => {
@@ -149,12 +148,11 @@ function snakeSlithers() {
       //* Snake speed will increase each time it eats the fruit
       if (snakePosition[0] === fruitPosition) {
         clearInterval(slithering);
-        speed = speed - 100;
+        speed = speed - 200;
         score += 100;
-        points += 100;
         snakeSlithers();
         console.log("The speed is now " + speed);
-        scoreboard.innerText = (`Scoreboard: You won ${points} points! The score is now ${score}`);
+        scoreboard.innerText = (`Scoreboard: You won just won 100 points! The score is now ${score}`);
       } else if (speed === 1000) {
         clearInterval(slithering); // it stops the snake from moving once the speed is 1000
         console.log("You win!");
