@@ -40,7 +40,7 @@ body {
 
 /* Strawberry */
 .fruit {
-  background-image: url('strawberry.jpeg');
+  background-image: url('../images/strawberry.jpeg');
   background-size: cover;
 }
 
