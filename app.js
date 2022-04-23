@@ -19,6 +19,7 @@ let snakePosition = [55, 54, 53];
 let fruitPosition = Math.floor(Math.random() * totalCells);
 let speed = 2000;
 let score = 0;
+let points = 0;
 
 function addSnake() {
   snakePosition.map(position => {
@@ -110,7 +111,7 @@ function snakeSlithers() {
     } else if (snakeMovement === 'ArrowDown' && colPosition < width - 1) {
       keyDown();
     } else {
-      //! alert("Game Over!"); // if snake hits the wall, a pop-up alert will state "Game Over!"
+      alert("Game Over!"); // if snake hits the wall, a pop-up alert will state "Game Over!"
     }
 
     //The game should have a pop-up saying "Game Over!" when the snake hits itself
@@ -150,9 +151,10 @@ function snakeSlithers() {
         clearInterval(slithering);
         speed = speed - 100;
         score += 100;
+        points += 100;
         snakeSlithers();
         console.log("The speed is now " + speed);
-        scoreboard.innerText = (`Scoreboard: You won 100 points! The score is now ${score}`);
+        scoreboard.innerText = (`Scoreboard: You won ${points} points! The score is now ${score}`);
       } else if (speed === 1000) {
         clearInterval(slithering); // it stops the snake from moving once the speed is 1000
         console.log("You win!");
