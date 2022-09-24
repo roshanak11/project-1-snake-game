@@ -34,7 +34,7 @@ function removeSnake() {
   })
 }
 
-// Creates grid
+// Creates grid, adds divs to the cells, then pushes them to the grid
 function createGrid() {
   for (let i = 0; i < totalCells; i++) {
     const cell = document.createElement('div');
@@ -95,6 +95,7 @@ function keyDown() {
 function snakeSlithers() {
   const slithering = setInterval(() => {
     //Use multiple if statements to move the snake automatically according to last key direction.
+    //*Game ends if snake hits wall
     const rowPosition = snakePosition[0] % width; //This code stops the snake from going through the wall on the left and right side of the grid
     const colPosition = Math.floor(snakePosition[0] / width); //This code also stops the snake from going through the wall on the top and bottom of the grid
     if (snakeMovement === 'ArrowRight' && rowPosition < width - 1) { // && rowPosition < width - 1 stops snake from moving through right side of grid
@@ -109,6 +110,7 @@ function snakeSlithers() {
       alert("Game Over!"); // if snake hits the wall, a pop-up alert will state "Game Over!"
     }
 
+    //*Game ends if snake hits itself
     //The game should have a pop-up saying "Game Over!" when the snake head snakePosition[0] hits itself in any of the tail indices snakePosition[1-9]
     if (
       (snakePosition[0] === snakePosition[1])
@@ -128,11 +130,11 @@ function snakeSlithers() {
       (snakePosition[0] === snakePosition[8])
       ||
       (snakePosition[0] === snakePosition[9])) {
-      alert("Game over!"); // Game ends and a pop-up says "Game Over" when snake hits itselg
+      alert("Game over!"); // Game ends and a pop-up says "Game Over" when snake hits itself
     }
 
 
-    // This part of code speeds up snake and makes tail grow longer as it eats fruit   
+    //*Snake speeds up and gets longer when it eats fruit   
     if (snakePosition[0] === fruitPosition) { // indicates snake head at index 0 landing on fruit and eating it
       cells[fruitPosition].classList.remove('fruit'); // the fruit will be removed when the snake head lands on it and eats it
       snakePosition.push(snakePosition.slice(-1)); //*Snake tail grows: grabs last item of the snakePosition array and then pushes it back to the snakePosition array to make tail grow by 1 cell when it eats the fruit.
@@ -143,7 +145,7 @@ function snakeSlithers() {
         score += 100; // game score will increase by 100 points each time snake eats fruit
         snakeSlithers(); // call snakeSlithers function inside this timed interval when the snake eats the fruit
         scoreboard.innerText = (`Scoreboard: You won just won 100 points! The score is now ${score}`); // the score HTML div is updated with the new score each time the snake eats the fruit. innerText inserts the text and the ${score} gives us the most recent score.
-      } else if (speed === 1000) { // if snake speed is 1000 milliseconds or 10 seconds, the game ends.
+      } else if (speed === 8000) { // if snake speed is 8000 milliseconds or 8 seconds, the game ends.
         clearInterval(slithering); // it stops the snake from moving once the speed is 1000 milliseconds or 10 seconds
         alert("You win!"); // the player is alerted that they have won the game once the game ends.
       }
